@@ -1,0 +1,36 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{6B54E5B9-2006-4F8C-A80F-CBF22E275625}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="ServiceRoutines.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="ServiceRoutines">
+        <MSBuild Projects="ServiceRoutines.dproj"/>
+    </Target>
+    <Target Name="ServiceRoutines:Clean">
+        <MSBuild Projects="ServiceRoutines.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ServiceRoutines:Make">
+        <MSBuild Projects="ServiceRoutines.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="ServiceRoutines"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="ServiceRoutines:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="ServiceRoutines:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
