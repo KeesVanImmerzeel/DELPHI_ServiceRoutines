@@ -5,7 +5,7 @@ interface
 
 Uses
   Windows, SysUtils, SHELLAPI, system.classes, Vcl.Grids,  Vcl.OleCtrls, SHDocVw,
-  ActiveX, Vcl.Dialogs, Vcl.Forms{, sfexec};
+  ActiveX, Vcl.Dialogs, Vcl.Forms{, sfexec.};
 
 Type
   Str12 = String[12];
