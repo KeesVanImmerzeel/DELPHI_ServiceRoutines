@@ -4,7 +4,7 @@ unit Uerror;
 interface
 
 uses
-  Vcl.dialogs, System.sysutils, System.UITypes, Vcl.Forms;
+  Vcl.dialogs, System.sysutils, System.UITypes, Vcl.Forms, IniFiles;
 
 Const
   {-General error-codes: -99...0}
@@ -101,11 +101,18 @@ Const
 // Function LogFileName: String;
 
 Type
+  TMode = ( Batch, Interactive, Unknown );
   EUnableToCreateLogFile = class( Exception );
   EUnableToCloseLogFile = class( Exception );
   EInput_File_DoesNotExist = class( Exception );
   EUnableToOpenFile = class( Exception );
   EReadErrorInLine = class( Exception );
+
+var
+    fini : TiniFile;
+var
+  LogFileName, IniFileName, InitialCurrentDir: TFileName;
+  Mode: TMode;
 
 ResourceString
   sUnableToCreateLogFile = 'Unable to create log-file: [%s].';
@@ -116,16 +123,22 @@ ResourceString
 
 implementation
 
-var
-  LogFileName: String;
-
 Procedure InitialiseLogFile;
 begin
+  InitialCurrentDir   := GetCurrentDir;
+  Application.ShowHint := True;
+  Mode                := Interactive;
+  FormatSettings.DecimalSeparator    := '.';
+
   LogFileName := ChangeFileExt ( Application.Exename, '.log' );
-    if fileExists( LogFileName ) then
+  if fileExists( LogFileName ) then
     DeleteFile( LogFileName );
   WriteToLogFile( Format( 'Starting application [%s] at %s.',
     [Application.Exename, DateTimeToStr (Now)] ) );
+
+  IniFileName := ChangeFileExt( Application.ExeName, '.ini' );
+  fini := TIniFile.Create( IniFileName );
+
 end;
 
 Procedure FinaliseLogFile;
@@ -133,6 +146,9 @@ begin
   if fileExists( LogFileName ) then
     WriteToLogFile( Format( 'Closing application [%s] at %s.',
     [Application.Exename, DateTimeToStr (Now)] ) );
+
+  fini.Free;
+  SetCurrentDir( InitialCurrentDir );
 end;
 
 Procedure OldHandleError( var lf: TextFile; const ErrMsgStr: String;

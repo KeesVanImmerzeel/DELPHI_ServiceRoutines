@@ -25,12 +25,9 @@ Type
   end;
   TSortOrder = ( Ascending, Descending );
 
-  TMode = ( Batch, Interactive, Unknown );
-
 var
   Stars: String[80];
   FormatSettings: TFormatSettings;  {-Delphi XE6}
-
 
 Function WordToStr( i: Word ): String;
   {-Converteert integer naar een string}

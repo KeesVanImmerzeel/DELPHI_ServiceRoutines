@@ -45,8 +45,6 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
-        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
         <DCC_E>false</DCC_E>
         <DCC_N>false</DCC_N>
         <DCC_S>false</DCC_S>
@@ -85,6 +83,7 @@
         <UWP_DelphiLogo44>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
     </PropertyGroup>
+    <Import Project="..\OPTSETS\Minus2.optset" Condition="'$(Cfg_1)'!='' And Exists('..\OPTSETS\Minus2.optset')"/>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
         <DCC_DebugDCUs>true</DCC_DebugDCUs>
@@ -92,17 +91,14 @@
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
         <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
+        <CfgDependentOn>..\OPTSETS\Minus2.optset</CfgDependentOn>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <DCC_RemoteDebug>false</DCC_RemoteDebug>
-        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DCC_ExeOutput>..\..\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_BplOutput>..\..\$(Platform)\$(Config)</DCC_BplOutput>
+        <DCC_DcuOutput>..\..\$(Platform)\$(Config)</DCC_DcuOutput>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <DCC_DcuOutput>..\$(Platform)\$(Config)</DCC_DcuOutput>
-        <DCC_UnitSearchPath>..\..\$(Platform)\$(Config);$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
-        <DCC_ExeOutput>..\$(Platform)\$(Config)</DCC_ExeOutput>
-        <BT_BuildType>Debug</BT_BuildType>
-        <Manifest_File>..\Basisbestanden\(None)</Manifest_File>
+        <Manifest_File>(None)</Manifest_File>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -110,37 +106,35 @@
         <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
         <DCC_DebugInformation>0</DCC_DebugInformation>
     </PropertyGroup>
+    <Import Project="..\OPTSETS\Minus2.optset" Condition="'$(Cfg_1_Win32)'!='' And Exists('..\OPTSETS\Minus2.optset')"/>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\Basisbestanden\OPWString\OpWString.pas"/>
-        <DCCReference Include="..\Basisbestanden\DUtils\DUtils.pas"/>
-        <DCCReference Include="..\Basisbestanden\UError\Uerror.pas"/>
-        <DCCReference Include="..\Basisbestanden\Dsi\DSiWin32.pas"/>
-        <DCCReference Include="..\Basisbestanden\HotLog\HotLog.pas"/>
-        <DCCReference Include="..\Basisbestanden\Plane\uPlane.pas"/>
-        <DCCReference Include="..\Basisbestanden\sfexec\2.0\SFEXEC.PAS"/>
-        <DCCReference Include="..\Basisbestanden\DirWatch\DirWatch.pas"/>
-        <DCCReference Include="..\Basisbestanden\TestNumRecip\uFit.pas"/>
-        <DCCReference Include="..\Basisbestanden\TestNumRecip\uNumRecip.pas"/>
-        <DCCReference Include="..\Basisbestanden\TestNumRecip\uPolInt.pas"/>
-        <DCCReference Include="..\Basisbestanden\RH\RHdialogs.pas"/>
-        <DCCReference Include="..\Basisbestanden\RH\RHmath.pas"/>
-        <DCCReference Include="..\Basisbestanden\RH\RHsystem.pas"/>
-        <DCCReference Include="..\Basisbestanden\DoubleMatrixList\UDoubleMatrixList.pas"/>
-        <DCCReference Include="..\Basisbestanden\gentypedlist\AbstractTypedList.pas"/>
-        <DCCReference Include="..\Basisbestanden\xygr212\xyun.pas">
+        <DCCReference Include="OPWString\OpWString.pas"/>
+        <DCCReference Include="DUtils\DUtils.pas"/>
+        <DCCReference Include="UError\Uerror.pas"/>
+        <DCCReference Include="Dsi\DSiWin32.pas"/>
+        <DCCReference Include="HotLog\HotLog.pas"/>
+        <DCCReference Include="Plane\uPlane.pas"/>
+        <DCCReference Include="DirWatch\DirWatch.pas"/>
+        <DCCReference Include="TestNumRecip\uFit.pas"/>
+        <DCCReference Include="TestNumRecip\uNumRecip.pas"/>
+        <DCCReference Include="TestNumRecip\uPolInt.pas"/>
+        <DCCReference Include="RH\RHdialogs.pas"/>
+        <DCCReference Include="RH\RHmath.pas"/>
+        <DCCReference Include="RH\RHsystem.pas"/>
+        <DCCReference Include="gentypedlist\AbstractTypedList.pas"/>
+        <DCCReference Include="xygr212\xyun.pas">
             <Form>Form1</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\Basisbestanden\xygr212\xygraph3d.pas"/>
-        <DCCReference Include="..\Basisbestanden\xygr212\xygraph.pas"/>
-        <DCCReference Include="..\Basisbestanden\xygr212\xycopy.pas">
+        <DCCReference Include="xygr212\xygraph3d.pas"/>
+        <DCCReference Include="xygr212\xygraph.pas"/>
+        <DCCReference Include="xygr212\xycopy.pas">
             <Form>CopyForm</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\Basisbestanden\xygr212\xycommon.pas"/>
+        <DCCReference Include="xygr212\xycommon.pas"/>
+        <DCCReference Include="lib.shp-1.2.9.r\Delphi\shpAPI129.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -151,6 +145,7 @@
         <BuildConfiguration Include="Debug">
             <Key>Cfg_1</Key>
             <CfgParent>Base</CfgParent>
+            <DependentOn>..\OPTSETS\Minus2.optset</DependentOn>
         </BuildConfiguration>
     </ItemGroup>
     <ProjectExtensions>
@@ -166,7 +161,6 @@
                     <Excluded_Packages Name="$(BDSBIN)\bcbofficexp250.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp250.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="D:\Documents\Embarcadero\Studio\Projects\Win32\Debug\AdoSetsPRJ.bpl">(untitled)</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
@@ -175,12 +169,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib" Class="DependencyModule">
+                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libPCRE.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libPCRE.dylib" Class="DependencyModule">
+                <DeployFile LocalName="$(BDS)\Redist\iossimulator\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="iOSSimulator">
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -190,15 +184,15 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="..\Win32\Debug\ServiceRoutines.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\..\Win32\Debug\ServiceRoutines.rsm" Configuration="Debug" Class="DebugSymbols">
                     <Platform Name="Win32">
-                        <RemoteName>ServiceRoutines.exe</RemoteName>
+                        <RemoteName>ServiceRoutines.rsm</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="sfexec\2.0\SFEXEC.PAS" Configuration="Debug" Class="ProjectFile">
+                <DeployFile LocalName="..\..\Win32\Debug\ServiceRoutines.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
-                        <RemoteDir>.\</RemoteDir>
+                        <RemoteName>ServiceRoutines.exe</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
