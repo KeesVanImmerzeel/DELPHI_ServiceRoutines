@@ -111,7 +111,7 @@ Type
 var
     fini : TiniFile;
 var
-  LogFileName, IniFileName, InitialCurrentDir: TFileName;
+  LogFileName, IniFileName, InitialCurrentDir, ApplicationFileName: TFileName;
   Mode: TMode;
 
 ResourceString
@@ -129,6 +129,7 @@ begin
   Application.ShowHint := True;
   Mode                := Interactive;
   FormatSettings.DecimalSeparator    := '.';
+  ApplicationFileName := ExpandFileName( ExtractFileName( Application.Exename ) );
 
   LogFileName := ChangeFileExt ( Application.Exename, '.log' );
   if fileExists( LogFileName ) then
