@@ -220,7 +220,9 @@ begin
   WriteToLogFile_No_CR( Format( FormatStr, Args ) );
 end;
 
-begin
+initialization
   LogFileName := 'Default.log';
+  Mode := Interactive;
+finalization
 end.
 
