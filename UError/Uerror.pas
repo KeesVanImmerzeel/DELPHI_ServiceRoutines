@@ -4,7 +4,7 @@ unit Uerror;
 interface
 
 uses
-  Vcl.dialogs, System.sysutils, System.UITypes, Vcl.Forms, IniFiles;
+  Vcl.dialogs, System.sysutils, System.UITypes, Vcl.Forms, IniFiles, DUtils;
 
 Const
   {-General error-codes: -99...0}
@@ -124,22 +124,27 @@ ResourceString
 implementation
 
 Procedure InitialiseLogFile;
+var
+  i: Integer;
 begin
-  InitialCurrentDir   := GetCurrentDir;
+  InitialCurrentDir := GetCurrentDir;
   Application.ShowHint := True;
-  Mode                := Interactive;
-  FormatSettings.DecimalSeparator    := '.';
-  ApplicationFileName := ExpandFileName( ExtractFileName( Application.Exename ) );
+  Mode := Interactive;
+  FormatSettings.DecimalSeparator := '.';
+  ApplicationFileName := ExpandFileName(ExtractFileName(Application.Exename));
 
-  LogFileName := ChangeFileExt ( Application.Exename, '.log' );
-  if fileExists( LogFileName ) then
-    DeleteFile( LogFileName );
-  WriteToLogFile( Format( 'Starting application [%s] at %s.',
-    [Application.Exename, DateTimeToStr (Now)] ) );
+  LogFileName := ChangeFileExt(Application.Exename, '.log');
+  if fileExists(LogFileName) then
+    DeleteFile(LogFileName);
+  WriteToLogFile(Format('Starting application [%s] at %s.',
+    [Application.Exename, DateTimeToStr(Now)]));
 
-  IniFileName := ChangeFileExt( Application.ExeName, '.ini' );
-  fini := TIniFile.Create( IniFileName );
+  WriteToLogFileFmt('ParamCount= %d', [ParamCount] );
+  for i := 1 to ParamCount do
+    WriteToLogFileFmt('ParamStr(%d) = [%s].', [ParamStr(i)] );
 
+  IniFileName := ChangeFileExt(Application.Exename, '.ini');
+  fini := TiniFile.Create(IniFileName);
 end;
 
 Procedure FinaliseLogFile;
@@ -225,4 +230,3 @@ initialization
   Mode := Interactive;
 finalization
 end.
-
