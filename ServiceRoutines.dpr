@@ -12,7 +12,6 @@ uses
   DSiWin32 in 'Dsi\DSiWin32.pas',
   HotLog in 'HotLog\HotLog.pas',
   uPlane in 'Plane\uPlane.pas',
-  DirWatch in 'DirWatch\DirWatch.pas',
   uFit in 'TestNumRecip\uFit.pas',
   uNumRecip in 'TestNumRecip\uNumRecip.pas',
   uPolInt in 'TestNumRecip\uPolInt.pas',

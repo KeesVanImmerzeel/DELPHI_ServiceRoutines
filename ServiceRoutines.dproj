@@ -117,7 +117,6 @@
         <DCCReference Include="Dsi\DSiWin32.pas"/>
         <DCCReference Include="HotLog\HotLog.pas"/>
         <DCCReference Include="Plane\uPlane.pas"/>
-        <DCCReference Include="DirWatch\DirWatch.pas"/>
         <DCCReference Include="TestNumRecip\uFit.pas"/>
         <DCCReference Include="TestNumRecip\uNumRecip.pas"/>
         <DCCReference Include="TestNumRecip\uPolInt.pas"/>
@@ -181,12 +180,6 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgsqlite3.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
-                        <Overwrite>true</Overwrite>
-                    </Platform>
-                </DeployFile>
-                <DeployFile LocalName="..\..\Win32\Debug\ServiceRoutines.rsm" Configuration="Debug" Class="DebugSymbols">
-                    <Platform Name="Win32">
-                        <RemoteName>ServiceRoutines.rsm</RemoteName>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
